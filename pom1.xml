@@ -1,0 +1,281 @@
+1) pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>SimpleInterest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.example.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+mvn clean compile
+mvn package
+Execute:
+
+java -jar target/SimpleInterest-1.0-SNAPSHOT.jar
+
+
+2)pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>ProjectName</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+3) 
+Follow these steps:
+Step 1: Stop Jenkins
+sudo systemctl stop jenkins
+Step 2: Open the configuration file
+sudo nano /var/lib/jenkins/config.xml
+Step 3: Find this line
+<useSecurity>true</useSecurity>
+Change it to:
+<useSecurity>false</useSecurity>
+Step 4: Save the file
+- Press Ctrl + O and press Enter.
+- Press Ctrl + X to exit.
+Step 5: Restart Jenkins
+sudo systemctl start jenkins
+Step 6: Open Jenkins
+Go to:
+http://localhost:8080
+Jenkins should now open without login authentication.
+
+sudo apt-get update
+sudo apt-get install openjdk-21-jre -y
+java -version
+sudo mkdir -p /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins -y
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl status jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+4)
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>PalindromeCI</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JDK17'
+        maven 'Maven3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/<username>/PalindromeCI.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Execute') {
+            steps {
+                sh 'java -jar target/PalindromeCI-1.0-SNAPSHOT.jar 121'
+            }
+        }
+    }
+}
+
+
+6)
+Step 1: Update the package list
+
+sudo apt update
+sudo apt upgrade -y
+Step 2: Install Ansible
+
+sudo apt install software-properties-common -y
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+Step 3: Verify Ansible installation
+
+ansible --version
+Step 4: Create project directory
+
+mkdir -p ~/ansible-apache
+cd ~/ansible-apache
+4. Ansible playbook
+Create a file named apache.yml.
+
+nano apache.yml
+Add the following YAML content:
+
+---
+- name: Install Apache and Deploy Welcome Page
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: Update package cache and install Apache
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: Start and enable Apache service
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Deploy welcome HTML page
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Welcome Page</title>
+          </head>
+          <body>
+              <h1>Welcome to My Web Application!</h1>
+              <p>Apache web server deployed using Ansible.</p>
+          </body>
+          </html>
+        mode: "0644"
+
+    - name: Verify web application
+      ansible.builtin.uri:
+        url: http://127.0.0.1/
+        status_code: 200
+
+    - name: Display deployment status
+      ansible.builtin.debug:
+        msg: "Welcome web page deployed successfully!"
+5. Implementation
+Step 1: Execute the playbook
+
+ansible-playbook apache.yml --ask-become-pass
+Enter the sudo password when prompted.
+
+Step 2: Verify Apache service
+
+sudo systemctl status apache2
+The service should show:
+
+Active: active (running)
+Step 3: Verify the web page
+
+curl http://localhost
+The HTML page should be returned.
+
+Step 4: Open in browser
+
+http://localhost
+The welcome page should appear.
+
+ansible --version
+ansible-galaxy init prerequisites
+ansible-galaxy init PostgreSQL
+ansible-galaxy init apache
+ansible-playbook stack.yml --ask-become-pass
+ansible-playbook webapp.yml --syntax-check
+ansible-playbook webapp.yml --ask-become-pass
+sudo systemctl status apache2
+curl http://localhost
